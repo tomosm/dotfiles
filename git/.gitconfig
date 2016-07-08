@@ -1,0 +1,48 @@
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+[user]
+	name = Tomonori Murakami
+	email = crosslife777@gmail.com
+[core]
+	autocrlf = input
+	safecrlf = true
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
+	pushall = push --recurse-submodules=on-demand
+	s = status -s
+	lg = log --oneline --decorate --all --graph
+	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+[merge]
+	tool = intellij
+[mergetool "intellij"]
+	cmd = idea merge $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE") $(cd $(dirname "$BASE") && pwd)/$(basename "$BASE") $(cd $(dirname "$MERGED") && pwd)/$(basename "$MERGED")
+	trustExitCode = true
+[diff]
+	compactionHeuristic = true
+	tool = intellij
+[difftool "intellij"]
+	cmd = idea diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
+[pager]
+	log  = (diff-highlight 2>/dev/null || cat) | ${PAGER:-less}
+	show = (diff-highlight 2>/dev/null || cat) | ${PAGER:-less}
+	diff = (diff-highlight 2>/dev/null || cat) | ${PAGER:-less}
+[interactive]
+	diffFilter = (diff-highlight 2>/dev/null || cat)
+[color]
+	ui = true
+[push]
+	default = simple
+[pull]
+	rebase = true
+[rerere]
+	enabled = true
+[credential]
+	helper = cache
