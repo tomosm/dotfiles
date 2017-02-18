@@ -1,5 +1,7 @@
+export DEFAULT_USER=`whoami`
+
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/tomo/.oh-my-zsh
+export ZSH=/Users/$DEFAULT_USER/.oh-my-zsh
  
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -7,7 +9,6 @@ export ZSH=/Users/tomo/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 # oh-my-zshで利用できるテーマを指定
 #ZSH_THEME="simple"
-#ZSH_THEME="agnoster"
 #ZSH_THEME="powerline"
 #ZSH_THEME="solarized-powerline"
 
@@ -15,6 +16,19 @@ export ZSH=/Users/tomo/.oh-my-zsh
 #ZSH_POWERLINE_SINGLE_LINE="true"
 #ZSH_POWERLINE_SHOW_OS="false"
 
+# https://gist.github.com/kevin-smets/8568070
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#ZSH_THEME="agnoster"
+
+##########
+# theme setting for powerlevel9k on shell
+ZSH_THEME="powerlevel9k/powerlevel9k"
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(time context dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status rbenv)
+POWERLEVEL9K_STATUS_VERBOSE=false
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 
 # oh my zshで利用できるプラグインを指定
 #plugins=(brew brew-cask cdd gem git rbenv vagrant git-remote-branch zsh-syntax-highlighting)
@@ -90,12 +104,11 @@ compinit -u
 
 
 # powerline
-powerline-daemon -q
-. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+#powerline-daemon -q
+#. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 #POWERLINE_HIDE_HOST_NAME="true"
 #POWERLINE_HIDE_GIT_PROMPT_STATUS="true"
 #POWERLINE_SHOW_GIT_ON_RIGHT="true"
-
 
 # 補完関係その他
 #補完のときプロンプトの位置を変えない
@@ -123,3 +136,65 @@ setopt auto_param_slash
 setopt auto_remove_slash
 
 
+###########
+# private
+
+## PATH
+export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
+#export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export MANPATH="/usr/local/man:$MANPATH"
+
+if [ -d $HOME/.anyenv ] ; then
+    export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init -)"
+    # tmux対応
+    for D in `\ls $HOME/.anyenv/envs`
+    do
+        export PATH="$HOME/.anyenv/envs/$D/shims:$PATH"
+    done
+fi
+
+source $HOME/.phpbrew/bashrc
+
+# sublime
+export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl";
+#export EDITOR='subl -w'
+
+# intellij
+export IDEA_HOME="/Applications/IntelliJ\ IDEA.app/Contents/MacOS"
+export PATH="$PATH:$IDEA_HOME"
+
+# git diff
+export PATH=$PATH:/usr/local/share/git-core/contrib/diff-highlight
+
+# brew cask
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+# php 5.6
+# export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
+
+# Racket for scheme
+# export PATH="/Applications/Racket v6.7/bin:$PATH"
+
+# golang
+#export PATH=$PATH:/usr/local/opt/go/libexec/bin
+#export PATH=$PATH:/Users/tmurakami/.anyenv/envs/goenv/shims/go
+#export GOPATH=$HOME/go
+export GOPATH=/projects/share/go
+
+# peco (history)
+function peco-select-history() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(\history -n 1 | \
+        eval $tac | \
+        peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle clear-screen
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history

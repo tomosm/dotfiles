@@ -31,3 +31,11 @@ export PATH=$PATH:/usr/local/share/git-core/contrib/diff-highlight
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+
+# php 5.6
+#export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
+
+# bash-completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
