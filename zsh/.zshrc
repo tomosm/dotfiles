@@ -158,8 +158,6 @@ if [ -d $HOME/.anyenv ] ; then
     done
 fi
 
-# source $HOME/.phpbrew/bashrc
-
 # sublime
 export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl";
 #export EDITOR='subl -w'
@@ -176,6 +174,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # php 5.6
 # export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
+# source $HOME/.phpbrew/bashrc
 
 # Racket for scheme
 # export PATH="/Applications/Racket v6.7/bin:$PATH"
