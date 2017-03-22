@@ -1,5 +1,9 @@
 # For tmux
 export TERM="xterm-256color"
+# 初回シェル時のみ tmux実行
+if [ $SHLVL = 1 ]; then
+  tmux
+fi
 
 # Add user
 export DEFAULT_USER=`whoami`
