@@ -1,3 +1,7 @@
+# For tmux
+export TERM="xterm-256color"
+
+# Add user
 export DEFAULT_USER=`whoami`
 
 # Path to your oh-my-zsh installation.
@@ -154,7 +158,7 @@ if [ -d $HOME/.anyenv ] ; then
     done
 fi
 
-source $HOME/.phpbrew/bashrc
+# source $HOME/.phpbrew/bashrc
 
 # sublime
 export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl";
