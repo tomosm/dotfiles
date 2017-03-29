@@ -11,4 +11,4 @@
 # alias got='git '
 # alias get='git '
 
-source /Users/tmurakami/.phpbrew/bashrc
+#source /Users/tmurakami/.phpbrew/bashrc
