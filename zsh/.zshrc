@@ -1,8 +1,9 @@
+
 # For tmux
 export TERM="xterm-256color"
 # 初回シェル時のみ tmux実行
 if [ $SHLVL = 1 ]; then
-  tmux
+#  tmux
 fi
 
 # Add user
@@ -148,7 +149,7 @@ setopt auto_remove_slash
 # private
 
 ## PATH
-export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/local/opt/imagemagick/bin:/usr/local/elasticsearch/bin:$PATH"
 #export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export MANPATH="/usr/local/man:$MANPATH"
 
@@ -205,3 +206,16 @@ function peco-select-history() {
 }
 zle -N peco-select-history
 bindkey '^r' peco-select-history
+
+# Java
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home
+export PATH=$JAVA_HOME/bin:$PATH
+
+
+# Octave
+export PATH="/usr/local/octave/3.8.0/bin/:$PATH"
+
+# others
+export PATH="/usr/local/opt/qt/bin:$PATH"
+export PATH="/usr/local/opt/libpng@1.2/bin:$PATH"
+export PATH="/usr/local/opt/libxslt/bin:$PATH"
