@@ -35,3 +35,4 @@ alias llat="ls -lat"
 alias diff="colordiff"
 alias ldd="otool -L "
 alias be="bundle exec"
+alias git=hub
